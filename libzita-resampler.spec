@@ -1,7 +1,7 @@
 %define name_base       zita-resampler
 %define name            libzita-resampler
 %define version         0.1.1
-%define release         %mkrel 1
+%define release         %mkrel 2
 %define lib_major       2
 %define lib_name        %mklibname %name_base %{lib_major}
 %define lib_name_devel  %mklibname %name_base -d
@@ -56,7 +56,8 @@ output signals are assumed to be stored as interleaved samples
 %package  -n %{lib_name_devel}
 Summary:       Development libraries and headers for %{name}
 Group:         Sound
-Requires:      %{name} = %{version}-%{release}
+Requires:      %{lib_name} = %{version}-%{release}
+Provides:      %{name}-devel = %{version}-%{release}
 
 %description -n %{lib_name_devel}
 This package contains the headers and development libraries for %{name}.
