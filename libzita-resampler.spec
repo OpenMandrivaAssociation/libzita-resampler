@@ -83,6 +83,7 @@ sed -i 's|-O2|%{optflags} -I../libs|' libs/Makefile
 sed -i 's|-O3|%{optflags} -I../libs|' apps/Makefile
 sed -i 's|ldconfig||' libs/Makefile
 sed -i 's|-march=native||' libs/Makefile
+sed -i 's|-march=native||' apps/Makefile
 
 %build
 export LDFLAGS="-L../libs"
