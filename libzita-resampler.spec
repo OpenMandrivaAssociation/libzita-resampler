@@ -118,3 +118,22 @@ rm -rf %{buildroot}
 %doc docs/*
 %{_libdir}/%{name}.so
 %{_includedir}/%{name_base}/*.h
+
+
+%changelog
+* Sun Apr 15 2012 Frank Kober <emuse@mandriva.org> 1.1.0-1
++ Revision: 791106
+- removed march CXX flag from Makefile
+- update to new version 1.1.0
+  o libmajor is 1
+  o separate package for zresample binary
+  o drop patch0, got fixed upstream
+
+* Wed Nov 02 2011 Alexander Khrukin <akhrukin@mandriva.org> 0.1.1-2
++ Revision: 712209
+- rpmlint fixes and dependency fixed into mklibname
+
+* Wed Nov 02 2011 Alexander Khrukin <akhrukin@mandriva.org> 0.1.1-1
++ Revision: 712202
+- imported package libzita-resampler
+
