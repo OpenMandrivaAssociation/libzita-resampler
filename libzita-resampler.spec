@@ -1,7 +1,4 @@
 %define name_base       zita-resampler
-%define name            libzita-resampler
-%define version         1.1.0
-%define release         1
 %define lib_major       1
 %define lib_name        %mklibname %name_base %{lib_major}
 %define lib_name_devel  %mklibname %name_base -d
@@ -9,15 +6,13 @@
 
 
 Summary:       Fast, high-quality sample rate conversion library
-Name:          %{name}
-Version:       %{version}
-Release:       %{release}
+Name:          libzita-resampler
+Version:       1.1.0
+Release:       2
 License:       GPLv2+
 Group:         Sound
 URL:           http://www.kokkinizita.net/linuxaudio/zita-resampler/resampler.html
 Source0:       http://www.kokkinizita.net/linuxaudio/downloads/zita-resampler-%{version}.tar.bz2
-BuildRoot:     %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
 BuildRequires: sndfile-devel
 
 %description
@@ -57,7 +52,8 @@ Requires:      %{lib_name} = %{version}-%{release}
 Provides:      %{name}-devel = %{version}-%{release}
 
 %description -n %{lib_name_devel}
-This package contains the headers and development libraries for %{name}.
+This package contains the headers and development libraries
+for %{name}.
 
 
 
@@ -96,13 +92,11 @@ ln -sf libzita-resampler.so.%{version} libs/libzita-resampler.so
 make %{?_smp_mflags} -C apps
 
 %install
-rm -rf %{buildroot}
 make PREFIX=%{buildroot}%{_prefix} LIBDIR=%{_lib} -C libs install
 make PREFIX=%{buildroot}%{_prefix} BINDIR=%{_bin} \
      MANDIR=%{buildroot}%{_mandir}/man1 -C apps install
 
 %clean
-rm -rf %{buildroot}
 
 %files -n %{name_base}
 %{_bindir}/zresample
