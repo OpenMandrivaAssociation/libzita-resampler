@@ -5,7 +5,7 @@
 Summary:	Fast, high-quality sample rate conversion library
 Name:		libzita-resampler
 Version:	1.1.0
-Release:	4
+Release:	5
 License:	GPLv2+
 Group:		Sound
 Url:		http://www.kokkinizita.net/linuxaudio/zita-resampler/resampler.html
