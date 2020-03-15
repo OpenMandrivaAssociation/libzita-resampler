@@ -4,9 +4,9 @@
 
 Summary:	Fast, high-quality sample rate conversion library
 Name:		libzita-resampler
-Version:	1.1.0
-Release:	5
-License:	GPLv2+
+Version:	1.6.2
+Release:	2
+License:	GPLv3
 Group:		Sound
 Url:		http://www.kokkinizita.net/linuxaudio/zita-resampler/resampler.html
 Source0:	http://www.kokkinizita.net/linuxaudio/downloads/zita-resampler-%{version}.tar.bz2
@@ -43,7 +43,8 @@ output signals are assumed to be stored as interleaved samples
 
 %files -n %{libname}
 %doc AUTHORS COPYING
-%{_libdir}/%{name}.so.%{major}*
+%{_libdir}/%{name}.so.%{version}
+%{_libdir}/%{name}.so.%{major}
 
 #----------------------------------------------------------------------------
 
@@ -77,7 +78,9 @@ This package provides the zresample executable.
 
 %files -n zita-resampler
 %{_bindir}/zresample
+%{_bindir}/zretune
 %{_mandir}/man1/zresample.*
+%{_mandir}/man1/zretune.*
 
 #----------------------------------------------------------------------------
 
@@ -85,22 +88,24 @@ This package provides the zresample executable.
 %setup -q -n zita-resampler-%{version}
 
 # To make sure to have the correct Fedora specific flags:
-sed -i 's|-O2|%{optflags} -I../libs|' libs/Makefile
-sed -i 's|-O3|%{optflags} -I../libs|' apps/Makefile
-sed -i 's|ldconfig||' libs/Makefile
-sed -i 's|-march=native||' libs/Makefile
+sed -i 's|-O2|%{optflags}|' source/Makefile
+sed -i 's|-O2|%{optflags} -I../source|' apps/Makefile
+sed -i 's|ldconfig||' source/Makefile
+sed -i 's|-march=native||' source/Makefile
 sed -i 's|-march=native||' apps/Makefile
 
 %build
-export LDFLAGS="-L../libs"
-%make -C libs
+export LDFLAGS="-L../source"
+%make -C source
 # In order to build apps, we need to create the symlink
 # Note that this is originally done at "make install" stage
-ln -sf libzita-resampler.so.%{version} libs/libzita-resampler.so
+ln -sf libzita-resampler.so.%{version} source/libzita-resampler.so
+
 %make -C apps
 
 %install
-make PREFIX=%{buildroot}%{_prefix} LIBDIR=%{_lib} -C libs install
-make PREFIX=%{buildroot}%{_prefix} BINDIR=%{_bin} \
+ln -sf libzita-resampler.so.%{version} source/libzita-resampler.so.%{major}
+make PREFIX=%{buildroot}%{_prefix} -C source install
+make PREFIX=%{buildroot}%{_prefix}  \
 	MANDIR=%{buildroot}%{_mandir}/man1 -C apps install
 
