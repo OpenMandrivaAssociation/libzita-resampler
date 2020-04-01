@@ -8,8 +8,8 @@ Version:	1.6.2
 Release:	2
 License:	GPLv3
 Group:		Sound
-Url:		http://www.kokkinizita.net/linuxaudio/zita-resampler/resampler.html
-Source0:	http://www.kokkinizita.net/linuxaudio/downloads/zita-resampler-%{version}.tar.bz2
+Url:		https://kokkinizita.linuxaudio.org/linuxaudio/zita-resampler/resampler.html
+Source0:	https://kokkinizita.linuxaudio.org/linuxaudio/downloads/zita-resampler-%{version}.tar.bz2
 BuildRequires:	pkgconfig(sndfile)
 
 %description
