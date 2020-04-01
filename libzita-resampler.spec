@@ -93,19 +93,20 @@ sed -i 's|-O2|%{optflags} -I../source|' apps/Makefile
 sed -i 's|ldconfig||' source/Makefile
 sed -i 's|-march=native||' source/Makefile
 sed -i 's|-march=native||' apps/Makefile
+sed -i -e '/install -d/d' apps/Makefile
 
 %build
 export LDFLAGS="-L../source"
-%make -C source
+%make_build PREFIX=%{_prefix} -C source
 # In order to build apps, we need to create the symlink
 # Note that this is originally done at "make install" stage
 ln -sf libzita-resampler.so.%{version} source/libzita-resampler.so
 
-%make -C apps
+%make_build PREFIX=%{_prefix} -C apps
 
 %install
 ln -sf libzita-resampler.so.%{version} source/libzita-resampler.so.%{major}
-make PREFIX=%{buildroot}%{_prefix} -C source install
-make PREFIX=%{buildroot}%{_prefix}  \
-	MANDIR=%{buildroot}%{_mandir}/man1 -C apps install
+mkdir -p %{buildroot}%{_mandir}/man1 %{buildroot}%{_bindir}
+%make_install PREFIX=%{_prefix} -C source
+%make_install PREFIX=%{_prefix} -C apps
 
