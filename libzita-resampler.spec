@@ -10,6 +10,7 @@ License:	GPLv3
 Group:		Sound
 Url:		https://kokkinizita.linuxaudio.org/linuxaudio/zita-resampler/resampler.html
 Source0:	https://kokkinizita.linuxaudio.org/linuxaudio/downloads/zita-resampler-%{version}.tar.xz
+BuildRequires:	make
 BuildRequires:	pkgconfig(sndfile)
 
 %description
